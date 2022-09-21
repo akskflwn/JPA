@@ -4,21 +4,25 @@ package jpabook.jpashop.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="dtype")
 @Getter @Setter
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue
-    @Column("item_id")
+    @Column(name="item_id")
     private Long id;
 
     private String name;
     private int price;
     private int stockQuantity;
+
+    @ManyToMany(mappedBy = "items",fetch = FetchType.LAZY)
+    private List<Category> categories = new ArrayList<>();
 }

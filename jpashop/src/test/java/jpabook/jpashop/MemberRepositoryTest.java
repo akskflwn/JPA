@@ -20,19 +20,19 @@ public class MemberRepositoryTest {
     @Transactional
     @Rollback(value = false)
     public void testMember() throws Exception {
-        //given
-        Member member = new Member();
-        member.setUsername("memberA");
-        //when
-        Long saveId = memberRepository.save(member);
-        Member member1 = memberRepository.find(saveId);
+            //given
+            Member member = new Member();
+            member.setName("memberA");
+            //when
+            Long saveId = memberRepository.save(member);
+            Member member1 = memberRepository.find(saveId);
 
-        //then
-        Assertions.assertThat(member1.getId()).isEqualTo(member.getId());
-        Assertions.assertThat(member1.getUsername()).isEqualTo(member.getUsername());
-        Assertions.assertThat(member1).isEqualTo(member);
+            //then
+            Assertions.assertThat(member1.getId()).isEqualTo(member.getId());
+            Assertions.assertThat(member1.getName()).isEqualTo(member.getName());
+            Assertions.assertThat(member1).isEqualTo(member);
 
-    }
+        }
 
 
 }
